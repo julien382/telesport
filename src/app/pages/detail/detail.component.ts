@@ -1,7 +1,8 @@
 // detail.component.ts
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
@@ -20,16 +21,21 @@ interface ChartValue {
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
   public chartValues: ChartValue[] = [];
+
+  subscriptions: Subscription[] = [];
 
   constructor(
     private olympicService: OlympicService,
     private route: ActivatedRoute
   ) {}
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
+  }
   ngOnInit(): void {
     // Utiliser le paramètre de la route pour obtenir le nom du pays
-    this.route.paramMap.pipe(
+    this.subscriptions.push(this.route.paramMap.pipe(
       // Utiliser switchMap pour gérer les opérations asynchrones
       switchMap(params => 
         // Appeler olympicService pour obtenir la liste des pays
@@ -53,6 +59,6 @@ export class DetailComponent implements OnInit {
               }))
             }}] : [];
             console.log('Medals Data:', this.chartValues[0]?.medalsData || []);
-    });
+    }));
   }
 }

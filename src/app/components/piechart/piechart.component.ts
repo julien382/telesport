@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
       [view]="[300, 300]" 
       [gradient]="false"
       (select)="onSelect($event)"
-      [legend]="true"
+      [legend]="false"
     >
     </ngx-charts-pie-chart>
   `,
