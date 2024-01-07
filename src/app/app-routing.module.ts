@@ -14,8 +14,12 @@ const routes: Routes = [
     component: DetailComponent,
   },
   {
-    path: '**',
+    path: 'not-found',
     component: NotFoundComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '/not-found',
   },
 ];
 
