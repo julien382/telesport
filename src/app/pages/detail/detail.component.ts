@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { Router } from '@angular/router';
 
 interface ChartValue {
   name: string;
@@ -28,8 +29,14 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private olympicService: OlympicService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
+
+  goBackToHome(): void {
+    this.router.navigate(['/']); // Naviguer vers la route de la page d'accueil
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
