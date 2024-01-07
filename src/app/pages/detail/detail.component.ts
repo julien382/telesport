@@ -58,7 +58,6 @@ export class DetailComponent implements OnInit, OnDestroy {
                   name: participation.year,
               }))
             }}] : [];
-            console.log('Medals Data:', this.chartValues[0]?.medalsData || []);
     }));
   }
 }
