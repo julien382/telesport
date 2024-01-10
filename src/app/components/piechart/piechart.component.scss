@@ -1,10 +1,12 @@
-/*.allTooltip{
-    position: absolute;
-    
+.allTooltip{
+    position: relative;
 }
 
 .custom-tooltip {
     position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #00838f;
     padding: 10px;
     border-radius: 5px;
@@ -18,38 +20,4 @@
 
 .row{
     display: flex;
-}*/
-
-.allTooltip {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .custom-tooltip {
-    background-color: #00838f; /* Couleur de fond du tooltip */
-    color: white; /* Couleur du texte du tooltip */
-    padding: 10px; /* Espacement interne du tooltip */
-    border-radius: 8px; /* Coins arrondis du tooltip */
-  
-    position: absolute;
-    bottom: 100%; /* Positionnement au-dessus du pointeur */
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .row {
-    display: flex;
-    align-items: center;
-  }
-  
-  .triangle-icon {
-    position: absolute;
-    fill: red; /* Couleur de remplissage du triangle */
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    bottom: -10px; /* Ajustez cette valeur pour la position de la pointe */
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
+}
