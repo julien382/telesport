@@ -9,7 +9,8 @@
     <div class="nameOfTheCountry" *ngIf="chartValues[0]">
       <h1>{{ chartValues[0].name }}</h1>
       <!-- le reste du contenu -->
-    </div>    <div class="dataOutLineChart">
+    </div>    
+    <div class="dataOutLineChart">
       <app-statistics [title]="'Number of entries'" [data]="chartValues[0].numberEntries"></app-statistics>
       <app-statistics [title]="'Total number medals'" [data]="chartValues[0].medalsCount"></app-statistics>
       <app-statistics [title]="'Total number of athletes'" [data]="chartValues[0].athleteCount"></app-statistics>
