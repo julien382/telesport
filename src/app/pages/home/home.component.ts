@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import Olympic from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
+
 interface ChartValue {
   name: string;
   value: number;

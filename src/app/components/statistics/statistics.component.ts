@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-statistics',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './statistics.component.html',
-  styleUrl: './statistics.component.scss'
+  template: `
+  <div class="containerNumberOfJos">
+    <p class="textDataOutPieChart">{{ title }}</p>
+    <p class="countDataOutPieChart">{{ data }}</p>
+  </div>
+`,  styleUrl: './statistics.component.scss'
 })
 export class StatisticsComponent {
-
+  @Input() title: string = '';
+  @Input() data: any;
 }
