@@ -13,7 +13,7 @@ interface ChartValue {
   numberEntries: number;
   medalsCount: number;
   athleteCount: number;
-  medalsData: { name: string; series: {value: number; name: number}[] }; 
+  medalsData: { name: string; series: {value: number; name: string}[] }; 
 }
 
 
@@ -59,10 +59,11 @@ export class DetailComponent implements OnInit, OnDestroy {
               numberEntries: selectedCountryData.participations.length,
               medalsCount: selectedCountryData.participations.reduce((sum, participation) => sum + participation.medalsCount, 0),
               athleteCount: selectedCountryData.participations.reduce((sum, participation) => sum + participation.athleteCount, 0),
-              medalsData: {name: selectedCountryData.country, 
+              medalsData: {
+                name: selectedCountryData.country, 
                 series: selectedCountryData.participations.map(participation => ({
                   value: participation.medalsCount,
-                  name: participation.year,
+                  name: participation.year.toString(),
               }))
             }}] : [];
     }));
