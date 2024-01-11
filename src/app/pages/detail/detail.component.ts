@@ -48,9 +48,20 @@ export class DetailComponent implements OnInit, OnDestroy {
         // Appeler olympicService pour obtenir la liste des pays
         this.olympicService.getOlympics().pipe(
           // Vérifier si le pays existe dans la liste
-          map(countries => countries.find(country => country.country === params.get('country')))
-          )
-          )
+          map(countries => {
+            // Utiliser Array.prototype.some pour vérifier si le pays existe
+            const countryExists = countries.some(country => country.country === params.get('country'));
+            
+            // Si le pays n'existe pas, rediriger vers la page "not-found"
+            if (!countryExists) {
+              this.router.navigate(['/not-found']);
+              return null; // Retourner null pour éviter de poursuivre le traitement
+            }
+
+            return countries.find(country => country.country === params.get('country'));
+          })
+        )
+      )
           ).subscribe(selectedCountryData => {
             // Affecter les valeurs du graphique en fonction des données du pays sélectionné
             this.chartValues = selectedCountryData ? [{

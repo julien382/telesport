@@ -11,9 +11,8 @@ interface PieChartData {
   template: `
     <ngx-charts-pie-chart
       [results]="data"
-      [view]="view" 
+      [view]="view"
       [labels]="true" 
-      
       [gradient]="false"
       (select)="onSelect($event)"
       [legend]="false"
