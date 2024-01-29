@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import Olympic from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   public olympics$: Observable<Olympic[]> = of([]);
   public chartValues$: Observable<ChartValue[]> = of([]);
   public totalGames: number = 0;
+  private olympicsSubscription: Subscription | undefined;
   
   constructor(private olympicService: OlympicService) {}
 
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
     this.olympics$ = this.olympicService.getOlympics();
 
     // Calculer le nombre total de Jeux olympiques (années uniques)
-    this.olympics$.subscribe(data => {
+    this.olympicsSubscription = this.olympics$.subscribe(data => {
       const uniqueYears = [...new Set(data.flatMap(item => item.participations.map(p => p.year)))];
       this.totalGames = uniqueYears.length;
     });
@@ -51,5 +52,11 @@ export class HomeComponent implements OnInit {
         return result;
       })
     );
+  }
+  ngOnDestroy(): void {
+    // Se désabonner de l'observable lors de la destruction du composant
+    if (this.olympicsSubscription) {
+      this.olympicsSubscription.unsubscribe();
+    }
   }
 }
