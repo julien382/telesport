@@ -36,14 +36,14 @@ interface PieChartData {
 })
 export class PiechartComponent {
   @Input() data: PieChartData[] = [];
-  tooltipTemplate: TemplateRef<any> | null = null;
+  tooltipTemplate: TemplateRef<{ model: PieChartData }> | null = null;
 
   view: [number, number] = window.innerWidth < 800 ? [window.innerWidth, window.innerWidth] : [window.innerWidth / 3, window.innerWidth / 3];
 
 
   constructor(private router: Router) {}
 
-  onSelect(event: any): void {
+  onSelect(event: { name?: string }): void {
     if (event.name) {
       // Naviguer vers la page de détail avec le nom du pays comme paramètre
       this.router.navigate(['/detail', event.name]);

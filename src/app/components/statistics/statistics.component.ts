@@ -11,5 +11,5 @@ import { Component, Input } from '@angular/core';
 })
 export class StatisticsComponent {
   @Input() title: string = '';
-  @Input() data: any;
+  @Input() data: number | null | undefined;
 }
