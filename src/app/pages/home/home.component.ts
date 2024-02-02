@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import Olympic from 'src/app/core/models/Olympic';
@@ -16,7 +16,7 @@ interface ChartValue {
   styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public olympics$: Observable<Olympic[]> = of([]);
   public chartValues$: Observable<ChartValue[]> = of([]);
   public totalGames: number = 0;
@@ -55,6 +55,8 @@ export class HomeComponent implements OnInit {
   }
   ngOnDestroy(): void {
     // Se désabonner de l'observable lors de la destruction du composant
+    console.log("execution de la methode ngOnDestroy");
+
     if (this.olympicsSubscription) {
       this.olympicsSubscription.unsubscribe();
     }
